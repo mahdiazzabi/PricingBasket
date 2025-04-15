@@ -1,6 +1,6 @@
 package com.pricing.basket;
 
-import main.java.com.pricing.basket.PriceBasketApp;
+import main.java.com.pricing.basket.PricingBasketApp;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -10,7 +10,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PriceBasketAppTest {
+public class PricingBasketAppTest {
     @Test
     public void alwaysTrue() {
         assertTrue(true);
@@ -26,7 +26,7 @@ public class PriceBasketAppTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        PriceBasketApp.main(new String[]{});
+        PricingBasketApp.main(new String[]{});
 
         String output = out.toString();
         assertTrue(output.contains("Subtotal: 3.10"));
@@ -41,7 +41,7 @@ public class PriceBasketAppTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        PriceBasketApp.main(new String[]{});
+        PricingBasketApp.main(new String[]{});
 
         String output = out.toString();
         assertTrue(output.contains("Unknown item: UnknownItem"));
@@ -57,7 +57,7 @@ public class PriceBasketAppTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        PriceBasketApp.main(new String[]{});
+        PricingBasketApp.main(new String[]{});
 
         String output = out.toString();
         assertTrue(output.contains("No items entered. Exiting program."));
@@ -72,7 +72,7 @@ public class PriceBasketAppTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        PriceBasketApp.main(new String[]{});
+        PricingBasketApp.main(new String[]{});
 
         String output = out.toString();
         assertTrue(output.contains("No items entered. Exiting program."));
