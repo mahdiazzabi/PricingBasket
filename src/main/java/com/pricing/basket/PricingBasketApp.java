@@ -1,36 +1,38 @@
 package com.pricing.basket;
 
-import com.pricing.basket.model.Basket;
-import com.pricing.basket.model.Product;
-import com.pricing.basket.service.PriceProductService;
+import com.pricing.basket.domain.model.Basket;
+import com.pricing.basket.domain.model.Product;
+import com.pricing.basket.adapter.service.PriceProductService;
+import com.pricing.basket.domain.service.IPriceProductService;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class PricingBasketApp {
+@SpringBootApplication
+public class PricingBasketApp implements ApplicationRunner {
 
-    private final PriceProductService priceProductService;
+    private final IPriceProductService priceProductService;
 
-    public PricingBasketApp(PriceProductService priceProductService) {
+    public PricingBasketApp(IPriceProductService priceProductService) {
         this.priceProductService = priceProductService;
     }
 
     public static void main(String[] args){
-        PriceProductService priceProductService = null;
-        try {
-            priceProductService = new PriceProductService();
-        } catch (IOException e) {
-            System.out.println("Error loading products. Exiting program.");
-            return;
-        }
-        PricingBasketApp app = new PricingBasketApp(priceProductService);
-        String input = app.getUserItems();
+        SpringApplication.run(PricingBasketApp.class, args);
+    }
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        String input = this.getUserItems();
         if (input.isEmpty()) {
             System.out.println("No items entered. Exiting program.");
             return;
         }
-        List<Product> products = app.mapProducts(input);
+        List<Product> products = this.mapProducts(input);
         System.out.printf("Subtotal: %s%n", new Basket(products).calculateSubtotal());
     }
 

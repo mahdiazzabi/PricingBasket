@@ -11,13 +11,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version> <!-- mets ici la version la plus récente -->
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>2.7.8</version> <!-- Version compatible avec Java 17 -->
+        <relativePath/>
     </parent>
 
     <properties>
-
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
@@ -28,27 +27,25 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.3.30</version>
-        </dependency>
 
         <!-- Pour les json -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.17.0</version>
         </dependency>
 
         <!-- Pour les tests -->
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.9.3</version>
+            <version>5.10.0</version> <!-- can be omitted when using the BOM -->
         </dependency>
-    </dependencies>
 
+    </dependencies>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <plugins>

@@ -1,18 +1,18 @@
-package com.pricing.basket.config;
+package com.pricing.basket.adapter.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pricing.basket.model.Product;
+import com.pricing.basket.domain.model.Product;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
+@Service
 public class ProductConfigLoader {
 
-    public static final String RESOURCES_PRODUCTS_JSON = "src/main/resources/products.json";
+    public static String RESOURCES_PRODUCTS_JSON = "src/main/resources/products.json";
 
-    // Charge les produits à partir du fichier JSON
-    public static List<Product> load() throws IOException {
+    public List<Product> load() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         ProductConfig config = mapper.readValue(new File(RESOURCES_PRODUCTS_JSON), ProductConfig.class);
         return config.getProducts();
@@ -23,10 +23,6 @@ public class ProductConfigLoader {
 
         public List<Product> getProducts() {
             return products;
-        }
-
-        public void setProducts(List<Product> products) {
-            this.products = products;
         }
     }
 }
