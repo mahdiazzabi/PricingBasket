@@ -1,12 +1,14 @@
-package main.java.com.pricing.basket.model;
+package com.pricing.basket.model;
 
 
 import java.math.BigDecimal;
 
 public class Product {
 
-    private final String name;
-    private final BigDecimal price;
+    private String name;
+    private BigDecimal price;
+
+    public Product() {} // Requis pour Jackson
 
     public Product(String name, BigDecimal price) {
         this.name = name;

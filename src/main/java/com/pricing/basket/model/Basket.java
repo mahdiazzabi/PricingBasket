@@ -1,4 +1,4 @@
-package main.java.com.pricing.basket.model;
+package com.pricing.basket.model;
 
 import java.math.BigDecimal;
 import java.util.*;

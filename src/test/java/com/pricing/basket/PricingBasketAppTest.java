@@ -1,16 +1,20 @@
 package com.pricing.basket;
-
-import main.java.com.pricing.basket.PricingBasketApp;
+import com.pricing.basket.service.PriceProductService;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
+
+import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PricingBasketAppTest {
+
+    private final PriceProductService  priceProductService = new PriceProductService();
+    private final PricingBasketApp pricingBasketApp = new PricingBasketApp(priceProductService);
+
+    public PricingBasketAppTest() throws IOException {
+    }
+
     @Test
     public void alwaysTrue() {
         assertTrue(true);
@@ -26,7 +30,7 @@ public class PricingBasketAppTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        PricingBasketApp.main(new String[]{});
+        pricingBasketApp.main(new String[]{});
 
         String output = out.toString();
         assertTrue(output.contains("Subtotal: 3.10"));
@@ -41,7 +45,7 @@ public class PricingBasketAppTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        PricingBasketApp.main(new String[]{});
+        pricingBasketApp.main(new String[]{});
 
         String output = out.toString();
         assertTrue(output.contains("Unknown item: UnknownItem"));
@@ -57,7 +61,7 @@ public class PricingBasketAppTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        PricingBasketApp.main(new String[]{});
+        pricingBasketApp.main(new String[]{});
 
         String output = out.toString();
         assertTrue(output.contains("No items entered. Exiting program."));
@@ -72,10 +76,9 @@ public class PricingBasketAppTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        PricingBasketApp.main(new String[]{});
+        pricingBasketApp.main(new String[]{});
 
         String output = out.toString();
         assertTrue(output.contains("No items entered. Exiting program."));
     }
-
 }
