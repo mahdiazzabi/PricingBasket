@@ -2,6 +2,7 @@ package com.pricing.basket.adapter.service;
 
 import com.pricing.basket.adapter.config.ProductConfigLoader;
 import com.pricing.basket.domain.model.Product;
+import com.pricing.basket.domain.repository.ProductRepository;
 import com.pricing.basket.domain.service.IPriceProductService;
 import org.springframework.stereotype.Service;
 
@@ -13,23 +14,29 @@ import java.util.List;
 public class ProductService implements IPriceProductService {
 
     private List<Product> availableProducts;
-    private final ProductConfigLoader loader;
+    private final ProductRepository productRepository;
 
-    public ProductService(ProductConfigLoader productConfigLoader) {
-        this.loader = productConfigLoader;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     @PostConstruct
     public void init(){
         try {
             // Load products from the configuration file
-            this.availableProducts = loader.load();
+            this.availableProducts = productRepository.findAll();
         } catch (IOException e) {
             System.err.println("Failed to load products: " + e.getMessage());
             this.availableProducts = List.of();
         }
     }
 
+    /**
+     * Retrieves a product by its name from the list of available products.
+     *
+     * @param item The name of the product to retrieve.
+     * @return The Product object if found, or null if no product matches the given name.
+     */
     @Override
     public Product getProduct(String item) {
         return availableProducts.stream()

@@ -1,7 +1,8 @@
 package com.pricing.basket;
-import com.pricing.basket.adapter.config.DiscountEligibiliyConfigLoader;
+import com.pricing.basket.adapter.config.DiscountEligibilityConfigLoader;
 import com.pricing.basket.adapter.config.ProductConfigLoader;
 import com.pricing.basket.adapter.service.BasketService;
+import com.pricing.basket.adapter.service.DiscountEvaluatorService;
 import com.pricing.basket.adapter.service.ProductService;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PricingBasketAppTest {
 
+
     private final ProductConfigLoader productConfigLoader = new ProductConfigLoader();
     private final ProductService productService = new ProductService(productConfigLoader);
-    private final DiscountEligibiliyConfigLoader discountEligibiliyConfigLoader = new DiscountEligibiliyConfigLoader();
-    private final BasketService basketService = new BasketService(discountEligibiliyConfigLoader);
+    private final DiscountEligibilityConfigLoader discountEligibilityConfigLoader = new DiscountEligibilityConfigLoader();
+    private final DiscountEvaluatorService discountEvaluatorService = new DiscountEvaluatorService(discountEligibilityConfigLoader);
+    private final BasketService basketService = new BasketService(discountEvaluatorService);
     private final PricingBasketApp pricingBasketApp = new PricingBasketApp(productService, basketService);
 
 

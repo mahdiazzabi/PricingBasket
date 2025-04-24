@@ -17,10 +17,6 @@ public class Basket {
         return Collections.unmodifiableList(products);
     }
 
-    public long countProduct(String productName) {
-        return products.stream().filter(i -> i.getName().equalsIgnoreCase(productName)).count();
-    }
-
     public List<DiscountEligibility> getDiscounts() {
         return discounts;
     }

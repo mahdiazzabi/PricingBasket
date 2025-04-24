@@ -8,7 +8,7 @@
         "minQuantity": 1,
         "ofTag" : "Apples",
         "startDate": "2025-04-01",
-        "endDate": "2025-04-30"
+        "endDate": "2025-12-31"
       }
     },
     {
@@ -19,7 +19,7 @@
         "minQuantity": 2,
         "ofTag" : "Soup",
         "startDate": "2025-04-01",
-        "endDate": "2025-04-30"
+        "endDate": "2025-12-31"
       }
     }
   ]

@@ -2,18 +2,20 @@ package com.pricing.basket.adapter.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pricing.basket.domain.model.DiscountEligibility;
-import org.springframework.stereotype.Service;
+import com.pricing.basket.domain.repository.DiscountEligibilityRepository;
+import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-@Service
-public class DiscountEligibiliyConfigLoader {
+@Repository
+public class DiscountEligibilityConfigLoader implements DiscountEligibilityRepository {
 
     public static String RESOURCES_DISCOUNT_ELIGIBILITY_JSON = "src/main/resources/discount-eligibility.json";
 
-    public List<DiscountEligibility> load() throws IOException {
+    @Override
+    public List<DiscountEligibility> findAll() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         DiscountEligibilityConfig config = mapper.readValue(new File(RESOURCES_DISCOUNT_ELIGIBILITY_JSON), DiscountEligibilityConfig.class);
         return config.getDiscountEligibility();

@@ -47,7 +47,7 @@ public class PricingBasketApp implements ApplicationRunner {
                 .map(item -> {
                     Product product = priceProductService.getProduct(item);
                     if (!Objects.isNull(product)) {
-                        return product; //todo fixme
+                        return product;
                     } else {
                         System.out.printf("Unknown item: %s%n", item);
                         return null;

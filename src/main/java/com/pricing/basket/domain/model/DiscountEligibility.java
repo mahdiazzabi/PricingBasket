@@ -12,8 +12,8 @@ public class DiscountEligibility {
     public DiscountEligibility() { // For Jackson deserialization
     }
 
-    public DiscountEligibility(String desciption, BigDecimal discount, ConditionEligibility conditionEligibility, String targetTag) {
-        this.description = desciption;
+    public DiscountEligibility(String description, BigDecimal discount, ConditionEligibility conditionEligibility, String targetTag) {
+        this.description = description;
         this.discount = discount;
         this.conditionEligibility = conditionEligibility;
         this.targetTag = targetTag;

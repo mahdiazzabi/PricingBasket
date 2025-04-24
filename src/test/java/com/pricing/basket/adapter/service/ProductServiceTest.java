@@ -1,7 +1,7 @@
 package com.pricing.basket.adapter.service;
 
-import com.pricing.basket.adapter.config.ProductConfigLoader;
 import com.pricing.basket.domain.model.Product;
+import com.pricing.basket.domain.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,14 +21,14 @@ import static org.mockito.Mockito.when;
 public class ProductServiceTest {
 
     @Mock
-    private ProductConfigLoader productConfigLoader;
+    private ProductRepository productRepository;
 
     @InjectMocks
     private ProductService service;
 
     @BeforeEach
     public void setUp() throws IOException {
-        when(productConfigLoader.load()).thenReturn(List.of(new Product("Apples", BigDecimal.TEN, List.of("Fruits" , "bag", "Apples"))));
+        when(productRepository.findAll()).thenReturn(List.of(new Product("Apples", BigDecimal.TEN, List.of("Fruits" , "bag", "Apples"))));
         service.init();
     }
 
