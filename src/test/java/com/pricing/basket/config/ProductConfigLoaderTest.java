@@ -43,7 +43,7 @@ public class ProductConfigLoaderTest {
         ProductConfigLoader.RESOURCES_PRODUCTS_JSON = tempFile.getAbsolutePath();
 
         // Charger les produits
-        List<Product> products = loader.load();
+        List<Product> products = loader.findAll();
 
         // Vérifier les résultats
         assertEquals(2, products.size());
@@ -54,7 +54,7 @@ public class ProductConfigLoaderTest {
     @Test
     public void throwsIOExceptionForMissingFile() {
         ProductConfigLoader.RESOURCES_PRODUCTS_JSON = "src/main/resources/missing.json";
-        assertThrows(IOException.class, () -> loader.load());
+        assertThrows(IOException.class, () -> loader.findAll());
     }
 
     @AfterAll

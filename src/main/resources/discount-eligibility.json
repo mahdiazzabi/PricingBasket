@@ -1,0 +1,26 @@
+{
+  "discountEligibility": [
+    {
+      "description": "Apples 10% off",
+      "discount": 10,
+      "targetTag": "Apples",
+      "conditionEligibility": {
+        "minQuantity": 1,
+        "ofTag" : "Apples",
+        "startDate": "2025-04-01",
+        "endDate": "2025-12-31"
+      }
+    },
+    {
+      "description": "Bread 50% off",
+      "discount": 50,
+      "targetTag": "Bread",
+      "conditionEligibility": {
+        "minQuantity": 2,
+        "ofTag" : "Soup",
+        "startDate": "2025-04-01",
+        "endDate": "2025-12-31"
+      }
+    }
+  ]
+}

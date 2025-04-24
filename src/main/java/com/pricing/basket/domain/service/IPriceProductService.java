@@ -1,8 +1,9 @@
 package com.pricing.basket.domain.service;
 
-import java.math.BigDecimal;
+import com.pricing.basket.domain.model.Product;
+
 import java.util.Optional;
 
 public interface IPriceProductService {
-    Optional<BigDecimal> getPriceProduct(String item);
+    Product getProduct(String item);
 }

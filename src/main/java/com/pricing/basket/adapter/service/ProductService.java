@@ -2,43 +2,46 @@ package com.pricing.basket.adapter.service;
 
 import com.pricing.basket.adapter.config.ProductConfigLoader;
 import com.pricing.basket.domain.model.Product;
+import com.pricing.basket.domain.repository.ProductRepository;
 import com.pricing.basket.domain.service.IPriceProductService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
-public class PriceProductService implements IPriceProductService {
+public class ProductService implements IPriceProductService {
 
     private List<Product> availableProducts;
-    private final ProductConfigLoader loader;
+    private final ProductRepository productRepository;
 
-    public PriceProductService(ProductConfigLoader productConfigLoader) {
-        this.loader = productConfigLoader;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     @PostConstruct
     public void init(){
         try {
             // Load products from the configuration file
-            this.availableProducts = loader.load();
+            this.availableProducts = productRepository.findAll();
         } catch (IOException e) {
             System.err.println("Failed to load products: " + e.getMessage());
             this.availableProducts = List.of();
         }
     }
 
+    /**
+     * Retrieves a product by its name from the list of available products.
+     *
+     * @param item The name of the product to retrieve.
+     * @return The Product object if found, or null if no product matches the given name.
+     */
     @Override
-    public Optional<BigDecimal> getPriceProduct(String item) {
-        Product result = availableProducts.stream()
+    public Product getProduct(String item) {
+        return availableProducts.stream()
                 .filter(p -> p.getName().equalsIgnoreCase(item))
                 .findFirst()
                 .orElse(null);
-        return Objects.isNull(result) ? Optional.empty() : Optional.ofNullable(result.getPrice());
     }
 }
