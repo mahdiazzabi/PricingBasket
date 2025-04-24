@@ -1,6 +1,8 @@
 package com.pricing.basket;
+import com.pricing.basket.adapter.config.DiscountEligibiliyConfigLoader;
 import com.pricing.basket.adapter.config.ProductConfigLoader;
-import com.pricing.basket.adapter.service.PriceProductService;
+import com.pricing.basket.adapter.service.BasketService;
+import com.pricing.basket.adapter.service.ProductService;
 import org.junit.jupiter.api.Test;
 
 
@@ -11,8 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PricingBasketAppTest {
 
     private final ProductConfigLoader productConfigLoader = new ProductConfigLoader();
-    private final PriceProductService  priceProductService = new PriceProductService(productConfigLoader);
-    private final PricingBasketApp pricingBasketApp = new PricingBasketApp(priceProductService);
+    private final ProductService productService = new ProductService(productConfigLoader);
+    private final DiscountEligibiliyConfigLoader discountEligibiliyConfigLoader = new DiscountEligibiliyConfigLoader();
+    private final BasketService basketService = new BasketService(discountEligibiliyConfigLoader);
+    private final PricingBasketApp pricingBasketApp = new PricingBasketApp(productService, basketService);
 
 
     public PricingBasketAppTest() throws IOException {
@@ -36,7 +40,7 @@ public class PricingBasketAppTest {
         PricingBasketApp.main(new String[]{});
 
         String output = out.toString();
-        assertTrue(output.contains("Subtotal: 3.10"));
+        assertTrue(output.contains("Subtotal: £3.10"));
     }
 
     @Test
@@ -52,7 +56,7 @@ public class PricingBasketAppTest {
 
         String output = out.toString();
         assertTrue(output.contains("Unknown item: UnknownItem"));
-        assertTrue(output.contains("Subtotal: 1.30"));
+        assertTrue(output.contains("Subtotal: £1.30"));
     }
 
     @Test

@@ -2,19 +2,24 @@
   "products": [
     {
       "name": "Soup",
-      "price": 0.65
-    },
+      "price": 0.65,
+	  "tags": ["Soup" , "Canned", "Oninon", "BLACKFRIDAY"]
+	},
     {
       "name": "Bread",
-      "price": 0.80
+      "price": 0.80,
+	  "tags": ["Bread" , "Bakery", "loaf", "Tradition", "BLACKFRIDAY"]
     },
     {
       "name": "Milk",
-      "price": 1.30
+      "price": 1.30,
+	  "tags": ["Milk" , "bottle", "BLACKFRIDAY"]
+ 
     },
     {
       "name": "Apples",
-      "price": 1.00
+      "price": 1.00,
+	  "tags": ["Fruits" , "bag", "Apples", "pink_lady", "BLACKFRIDAY"]
     }
   ]
 }

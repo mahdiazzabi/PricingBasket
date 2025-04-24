@@ -7,18 +7,15 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
-public class PriceProductService implements IPriceProductService {
+public class ProductService implements IPriceProductService {
 
     private List<Product> availableProducts;
     private final ProductConfigLoader loader;
 
-    public PriceProductService(ProductConfigLoader productConfigLoader) {
+    public ProductService(ProductConfigLoader productConfigLoader) {
         this.loader = productConfigLoader;
     }
 
@@ -34,11 +31,10 @@ public class PriceProductService implements IPriceProductService {
     }
 
     @Override
-    public Optional<BigDecimal> getPriceProduct(String item) {
-        Product result = availableProducts.stream()
+    public Product getProduct(String item) {
+        return availableProducts.stream()
                 .filter(p -> p.getName().equalsIgnoreCase(item))
                 .findFirst()
                 .orElse(null);
-        return Objects.isNull(result) ? Optional.empty() : Optional.ofNullable(result.getPrice());
     }
 }

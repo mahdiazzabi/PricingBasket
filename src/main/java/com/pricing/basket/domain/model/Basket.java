@@ -5,6 +5,9 @@ import java.util.*;
 
 public class Basket {
     private final List<Product> products;
+    private List<DiscountEligibility> discounts;
+    private BigDecimal subtotal;
+    private BigDecimal total;
 
     public Basket(List<Product> products) {
         this.products = new ArrayList<>(products);
@@ -18,9 +21,27 @@ public class Basket {
         return products.stream().filter(i -> i.getName().equalsIgnoreCase(productName)).count();
     }
 
-    public BigDecimal calculateSubtotal() {
-        return products.stream()
-                .map(Product::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    public List<DiscountEligibility> getDiscounts() {
+        return discounts;
+    }
+
+    public void setDiscounts(List<DiscountEligibility> discounts) {
+        this.discounts = discounts;
+    }
+
+    public BigDecimal getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 }
