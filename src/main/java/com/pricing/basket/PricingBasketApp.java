@@ -3,12 +3,14 @@ package com.pricing.basket;
 import com.pricing.basket.adapter.utils.BasketPrinter;
 import com.pricing.basket.domain.model.Basket;
 import com.pricing.basket.domain.model.Product;
+import com.pricing.basket.domain.service.IBasketPrinter;
 import com.pricing.basket.domain.service.IBasketService;
 import com.pricing.basket.domain.service.IPriceProductService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -18,10 +20,12 @@ public class PricingBasketApp implements ApplicationRunner {
 
     private final IPriceProductService priceProductService;
     private final IBasketService basketService;
+    private final IBasketPrinter basketPrinter;
 
-    public PricingBasketApp(IPriceProductService priceProductService, IBasketService basketService) {
+    public PricingBasketApp(IPriceProductService priceProductService, IBasketService basketService, IBasketPrinter basketPrinter) {
         this.priceProductService = priceProductService;
         this.basketService = basketService;
+        this.basketPrinter = basketPrinter;
     }
 
     public static void main(String[] args){
@@ -30,7 +34,7 @@ public class PricingBasketApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args){
-        String input = BasketPrinter.getInput();
+        String input = basketPrinter.getInput();
         if (input.isEmpty()) {
             System.out.println("No items entered. Exiting program.");
             return;
@@ -39,7 +43,7 @@ public class PricingBasketApp implements ApplicationRunner {
         List<Product> products = this.mapProducts(input);
         Basket basket = basketService.applyEligibilityDiscounts(products, LocalDate.now());
 
-        BasketPrinter.print(basket);
+        basketPrinter.print(basket);
     }
 
     private List<Product> mapProducts(String input) {
