@@ -1,15 +1,33 @@
 package com.pricing.basket.adapter.utils;
+import com.pricing.basket.adapter.config.AppProperties;
 import com.pricing.basket.domain.model.Basket;
 import com.pricing.basket.domain.model.DiscountEligibility;
+import com.pricing.basket.domain.service.IBasketPrinter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class BasketPrinter {
+@Service
+public class BasketPrinter implements IBasketPrinter {
 
-    public static String getInput() {
+    private final AppProperties appProperties;
+    private static NumberFormat currencyFormat;
+    static {
+        Locale locale = Locale.getDefault();
+        currencyFormat = NumberFormat.getCurrencyInstance(locale);
+    }
+
+    public BasketPrinter(AppProperties appProperties) {
+        this.appProperties = appProperties;
+        currencyFormat = NumberFormat.getCurrencyInstance(appProperties.getParsedLocale());
+    }
+
+    @Override
+    public String getInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter basket items separated by spaces (e.g., Apples Milk Bread):");
         String input = scanner.nextLine().trim();
@@ -17,8 +35,8 @@ public class BasketPrinter {
         return input;
     }
 
-    public static void print(Basket basket) {
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.UK);
+    @Override
+    public void print(Basket basket) {
 
         System.out.println("Subtotal: " + currencyFormat.format(basket.getSubtotal()));
 
@@ -37,7 +55,11 @@ public class BasketPrinter {
 
     private static String formatPence(BigDecimal amount) {
         int pennies = amount.multiply(BigDecimal.valueOf(100)).intValue();
-        return pennies + "p";
+        if (pennies >= 100) {
+            BigDecimal majorUnit = amount.setScale(2, BigDecimal.ROUND_DOWN);
+            return majorUnit + " " + currencyFormat.getCurrency().getSymbol();
+        }
+        return pennies + getSubunitSymbol();
     }
 
     private static BigDecimal computeDiscountValue(Basket basket, DiscountEligibility discount) {
@@ -45,5 +67,13 @@ public class BasketPrinter {
                     .filter(p -> p.getTags().contains(discount.getTargetTag()))
                     .map(p -> p.getPrice().multiply(discount.getDiscount()).divide(BigDecimal.valueOf(100)))
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private static String getSubunitSymbol() {
+        return switch (currencyFormat.getCurrency().getCurrencyCode()) {
+            case "GBP" -> "p";
+            case "USD", "EUR", "CAD", "AUD" -> "c";
+            default -> "";
+        };
     }
 }

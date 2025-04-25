@@ -1,10 +1,15 @@
 package com.pricing.basket;
+import com.pricing.basket.adapter.config.AppProperties;
 import com.pricing.basket.adapter.config.DiscountEligibilityConfigLoader;
 import com.pricing.basket.adapter.config.ProductConfigLoader;
 import com.pricing.basket.adapter.service.BasketService;
 import com.pricing.basket.adapter.service.DiscountEvaluatorService;
 import com.pricing.basket.adapter.service.ProductService;
+import com.pricing.basket.adapter.utils.BasketPrinter;
+import com.pricing.basket.domain.service.IBasketPrinter;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 
 import java.io.*;
@@ -19,7 +24,12 @@ public class PricingBasketAppTest {
     private final DiscountEligibilityConfigLoader discountEligibilityConfigLoader = new DiscountEligibilityConfigLoader();
     private final DiscountEvaluatorService discountEvaluatorService = new DiscountEvaluatorService(discountEligibilityConfigLoader);
     private final BasketService basketService = new BasketService(discountEvaluatorService);
-    private final PricingBasketApp pricingBasketApp = new PricingBasketApp(productService, basketService);
+    private final AppProperties appProperties = new AppProperties();
+    {
+        appProperties.setLocale("en_GB");
+    }
+    private final BasketPrinter basketPrinter = new BasketPrinter(appProperties) ;
+    private final PricingBasketApp pricingBasketApp = new PricingBasketApp(productService, basketService, basketPrinter);
 
 
     public PricingBasketAppTest() throws IOException {
