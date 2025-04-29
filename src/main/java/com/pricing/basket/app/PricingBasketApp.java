@@ -1,29 +1,30 @@
-package com.pricing.basket;
+package com.pricing.basket.app;
 
-import com.pricing.basket.adapter.utils.BasketPrinter;
 import com.pricing.basket.domain.model.Basket;
 import com.pricing.basket.domain.model.Product;
-import com.pricing.basket.domain.service.IBasketPrinter;
-import com.pricing.basket.domain.service.IBasketService;
-import com.pricing.basket.domain.service.IPriceProductService;
+import com.pricing.basket.domain.port.IBasketService;
+import com.pricing.basket.domain.port.IProductService;
+import com.pricing.basket.infra.port.IBasketPrinter;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDate;
 import java.util.*;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "com.pricing.basket.domain," +
+                "com.pricing.basket.infra"
+})
 public class PricingBasketApp implements ApplicationRunner {
 
-    private final IPriceProductService priceProductService;
+    private final IProductService productService;
     private final IBasketService basketService;
     private final IBasketPrinter basketPrinter;
 
-    public PricingBasketApp(IPriceProductService priceProductService, IBasketService basketService, IBasketPrinter basketPrinter) {
-        this.priceProductService = priceProductService;
+    public PricingBasketApp(IProductService productService, IBasketService basketService, IBasketPrinter basketPrinter) {
+        this.productService = productService;
         this.basketService = basketService;
         this.basketPrinter = basketPrinter;
     }
@@ -49,7 +50,7 @@ public class PricingBasketApp implements ApplicationRunner {
     private List<Product> mapProducts(String input) {
         return Arrays.stream(input.split("\\s+"))
                 .map(item -> {
-                    Product product = priceProductService.getProduct(item);
+                    Product product = productService.getProduct(item);
                     if (!Objects.isNull(product)) {
                         return product;
                     } else {

@@ -1,4 +1,4 @@
-package com.pricing.basket.domain.repository;
+package com.pricing.basket.infra.port.repository;
 
 import com.pricing.basket.domain.model.Product;
 

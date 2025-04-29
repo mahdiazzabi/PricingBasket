@@ -1,10 +1,9 @@
-package com.pricing.basket.adapter.service;
+package com.pricing.basket.domain.service;
 
-import com.pricing.basket.adapter.config.DiscountEligibilityConfigLoader;
 import com.pricing.basket.domain.model.DiscountEligibility;
 import com.pricing.basket.domain.model.Product;
-import com.pricing.basket.domain.repository.DiscountEligibilityRepository;
-import com.pricing.basket.domain.service.IDiscountEvaluatorService;
+import com.pricing.basket.infra.port.repository.DiscountEligibilityRepository;
+import com.pricing.basket.domain.port.IDiscountEvaluatorService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

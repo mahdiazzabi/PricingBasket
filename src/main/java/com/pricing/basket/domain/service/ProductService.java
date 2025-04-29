@@ -1,9 +1,8 @@
-package com.pricing.basket.adapter.service;
+package com.pricing.basket.domain.service;
 
-import com.pricing.basket.adapter.config.ProductConfigLoader;
 import com.pricing.basket.domain.model.Product;
-import com.pricing.basket.domain.repository.ProductRepository;
-import com.pricing.basket.domain.service.IPriceProductService;
+import com.pricing.basket.infra.port.repository.ProductRepository;
+import com.pricing.basket.domain.port.IProductService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -11,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class ProductService implements IPriceProductService {
+public class ProductService implements IProductService {
 
     private List<Product> availableProducts;
     private final ProductRepository productRepository;

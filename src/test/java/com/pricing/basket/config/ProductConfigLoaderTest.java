@@ -1,5 +1,5 @@
 package com.pricing.basket.config;
-import com.pricing.basket.adapter.config.ProductConfigLoader;
+import com.pricing.basket.infra.config.ProductConfigLoader;
 import com.pricing.basket.domain.model.Product;
 
 import java.io.File;

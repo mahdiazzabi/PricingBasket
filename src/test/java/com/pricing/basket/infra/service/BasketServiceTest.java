@@ -1,8 +1,10 @@
-package com.pricing.basket.adapter.service;
+package com.pricing.basket.infra.service;
 
 import com.pricing.basket.domain.model.Basket;
 import com.pricing.basket.domain.model.DiscountEligibility;
 import com.pricing.basket.domain.model.Product;
+import com.pricing.basket.domain.service.BasketService;
+import com.pricing.basket.domain.service.DiscountEvaluatorService;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;

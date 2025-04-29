@@ -54,7 +54,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>com.pricing.basket.PricingBasketApp</mainClass>
+                    <mainClass>com.pricing.basket.app.PricingBasketApp</mainClass>
                 </configuration>
             </plugin>
         </plugins>

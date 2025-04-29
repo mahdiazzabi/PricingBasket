@@ -1,17 +1,16 @@
-package com.pricing.basket.adapter.service;
+package com.pricing.basket.domain.service;
 
 import com.pricing.basket.domain.model.Basket;
 import com.pricing.basket.domain.model.DiscountEligibility;
 import com.pricing.basket.domain.model.Product;
-import com.pricing.basket.domain.service.IBasketService;
-import com.pricing.basket.domain.service.IDiscountEvaluatorService;
+import com.pricing.basket.domain.port.IBasketService;
+import com.pricing.basket.domain.port.IDiscountEvaluatorService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BasketService implements IBasketService {
