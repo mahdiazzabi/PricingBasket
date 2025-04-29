@@ -1,4 +1,4 @@
-package com.pricing.basket.adapter.config;
+package com.pricing.basket.infra.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

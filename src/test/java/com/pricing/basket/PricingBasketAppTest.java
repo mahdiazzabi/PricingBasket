@@ -1,15 +1,13 @@
 package com.pricing.basket;
-import com.pricing.basket.adapter.config.AppProperties;
-import com.pricing.basket.adapter.config.DiscountEligibilityConfigLoader;
-import com.pricing.basket.adapter.config.ProductConfigLoader;
-import com.pricing.basket.adapter.service.BasketService;
-import com.pricing.basket.adapter.service.DiscountEvaluatorService;
-import com.pricing.basket.adapter.service.ProductService;
-import com.pricing.basket.adapter.utils.BasketPrinter;
-import com.pricing.basket.domain.service.IBasketPrinter;
+import com.pricing.basket.app.PricingBasketApp;
+import com.pricing.basket.infra.config.AppProperties;
+import com.pricing.basket.infra.config.DiscountEligibilityConfigLoader;
+import com.pricing.basket.infra.config.ProductConfigLoader;
+import com.pricing.basket.domain.service.BasketService;
+import com.pricing.basket.domain.service.DiscountEvaluatorService;
+import com.pricing.basket.domain.service.ProductService;
+import com.pricing.basket.infra.utils.BasketPrinter;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 
 
 import java.io.*;

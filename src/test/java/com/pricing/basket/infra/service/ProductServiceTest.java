@@ -1,7 +1,8 @@
-package com.pricing.basket.adapter.service;
+package com.pricing.basket.infra.service;
 
 import com.pricing.basket.domain.model.Product;
-import com.pricing.basket.domain.repository.ProductRepository;
+import com.pricing.basket.domain.service.ProductService;
+import com.pricing.basket.infra.port.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

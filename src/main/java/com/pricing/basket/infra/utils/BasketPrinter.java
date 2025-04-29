@@ -1,9 +1,8 @@
-package com.pricing.basket.adapter.utils;
-import com.pricing.basket.adapter.config.AppProperties;
+package com.pricing.basket.infra.utils;
+import com.pricing.basket.infra.config.AppProperties;
 import com.pricing.basket.domain.model.Basket;
 import com.pricing.basket.domain.model.DiscountEligibility;
-import com.pricing.basket.domain.service.IBasketPrinter;
-import org.springframework.beans.factory.annotation.Value;
+import com.pricing.basket.infra.port.IBasketPrinter;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

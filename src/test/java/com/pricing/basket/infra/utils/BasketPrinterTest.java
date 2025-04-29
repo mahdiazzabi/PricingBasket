@@ -1,13 +1,11 @@
-package com.pricing.basket.adapter.utils;
+package com.pricing.basket.infra.utils;
 
-import com.pricing.basket.adapter.config.AppProperties;
+import com.pricing.basket.infra.config.AppProperties;
 import com.pricing.basket.domain.model.Basket;
-import com.pricing.basket.domain.model.DiscountEligibility;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.TestPropertySource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

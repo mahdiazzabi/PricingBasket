@@ -1,8 +1,8 @@
-package com.pricing.basket.adapter.config;
+package com.pricing.basket.infra.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pricing.basket.domain.model.Product;
-import com.pricing.basket.domain.repository.ProductRepository;
+import com.pricing.basket.infra.port.repository.ProductRepository;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
